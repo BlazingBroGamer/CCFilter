@@ -1,0 +1,7 @@
+name: CCFilter
+main: me.BlazingBroGamer.CCFilter.CCFilter
+author: BlazingBroGamer
+version: 1.0
+commands:
+    ccfilter:
+        description: CCFilter Command
