@@ -39,6 +39,7 @@ public class CCFilter extends JavaPlugin implements Listener{
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		String prefix = ChatColor.translateAlternateColorCodes('&', fc.getString("Prefix"));
 		if(label.equalsIgnoreCase("ccfilter")){
 			if(sender.hasPermission("ccfilter.admin")){
 				if(args.length == 1){
@@ -46,13 +47,13 @@ public class CCFilter extends JavaPlugin implements Listener{
 						reloadConfig();
 						fc = getConfig();
 						loadTriggers();
-						sender.sendMessage(ChatColor.GREEN + "Successfully reloaded the config!");
+						sender.sendMessage(prefix + ChatColor.GREEN + "Successfully reloaded the config!");
 						return true;
 					}
 				}
-				sender.sendMessage(ChatColor.RED + "Usage: /ccfilter reload");
+				sender.sendMessage(prefix + ChatColor.RED + "Usage: /ccfilter reload");
 			}else{
-				sender.sendMessage(ChatColor.RED + "You do not have permissions to use this command!");
+				sender.sendMessage(prefix + ChatColor.RED + "You do not have permissions to use this command!");
 			}
 		}
 		return false;
@@ -71,9 +72,10 @@ public class CCFilter extends JavaPlugin implements Listener{
 	}
 	
 	public boolean isTriggered(String cmd, Player p){
+		String prefix = ChatColor.translateAlternateColorCodes('&', fc.getString("Prefix"));
 		String trigger = getTrigger(cmd);
 		if(trigger != null){
-			p.sendMessage(ChatColor.translateAlternateColorCodes('&', fc.getString("Filters." + trigger + ".Message")));
+			p.sendMessage(prefix + ChatColor.translateAlternateColorCodes('&', fc.getString("Filters." + trigger + ".Message")));
 			Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable(){
 
 				@Override
